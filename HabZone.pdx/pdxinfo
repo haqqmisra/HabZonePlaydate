@@ -1,9 +1,9 @@
-name=HabZoneCalc
+name=Habitable Zone Calculator
 author=Jacob Haqq Misra
 description=Habitable Zone Calculator for Playdate
 bundleID=net.haqqmisra.habzonecalc
 version=1.0
-buildNumber=2
+buildNumber=3
 imagePath=images
 pdxversion=20601
-buildtime=798411574
+buildtime=798412920
