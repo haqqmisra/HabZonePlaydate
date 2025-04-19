@@ -17,7 +17,7 @@ typedef enum {
 	UserDefStar
 } Star;
 
-static const char* presetlabels[NUM_PRESETS+1] = {
+static const char* starlabels[NUM_PRESETS+1] = {
 	"Sun",
 	"Proxima Cen",
 	"TRAPPIST-1",

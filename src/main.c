@@ -3,11 +3,12 @@
 PlaydateAPI* pd = NULL;
 LCDFont* font = NULL;
 PDMenuItem *resetItem = NULL;
-PDMenuItem *massItem = NULL;
-PDMenuItem *presetItem  = NULL;
+PDMenuItem *planetItem = NULL;
+PDMenuItem *starItem  = NULL;
 
 Menu currentSelection;
 Star currentStar;
+Planet currentPlanet;
 
 float temperature, luminosity;
 char * stringnum;
@@ -27,7 +28,8 @@ int eventHandler( PlaydateAPI* pd, PDSystemEvent event, uint32_t arg )
 		pd->system->setUpdateCallback( update, pd );
 
 		resetItem  = pd->system->addMenuItem( "Reset", reset, pd );
-		presetItem = pd->system->addOptionsMenuItem( "Star", presetlabels, NUM_PRESETS, selectPreset, pd );
+		planetItem = pd->system->addOptionsMenuItem( "Planet", planetlabels, NUM_PLANETS, selectPlanet, pd );
+		starItem   = pd->system->addOptionsMenuItem( "Star", starlabels, NUM_PRESETS, selectStar, pd );
 
 		reset( pd );
 	}
@@ -87,15 +89,15 @@ static int update( void* userdata )
 
 	// Update current star name
 	if ( tflag == 1 ) {
-		pd->system->removeMenuItem( presetItem );
+		pd->system->removeMenuItem( starItem );
 		currentStar = checkCurrentStar( temperature, luminosity );
 		if ( currentStar == -1 ) {
-			presetItem = pd->system->addOptionsMenuItem( "Star", presetlabels, NUM_PRESETS+1, selectPreset, pd );
-			pd->system->setMenuItemValue( presetItem, UserDefStar );
+			starItem = pd->system->addOptionsMenuItem( "Star", starlabels, NUM_PRESETS+1, selectStar, pd );
+			pd->system->setMenuItemValue( starItem, UserDefStar );
 		}
 		else {
-			presetItem = pd->system->addOptionsMenuItem( "Star", presetlabels, NUM_PRESETS, selectPreset, pd );
-			pd->system->setMenuItemValue( presetItem, currentStar );
+			starItem = pd->system->addOptionsMenuItem( "Star", starlabels, NUM_PRESETS, selectStar, pd );
+			pd->system->setMenuItemValue( starItem, currentStar );
 		}
 		tflag = 0;
 	}
@@ -125,8 +127,13 @@ static int update( void* userdata )
 	}
 
 	// Display header text
-	pd->system->formatString( &stringnum, "Habitable Zone Calculator, v%1.1f", VERSION );
-	pd->graphics->drawText( stringnum, strlen( stringnum ), kASCIIEncoding, 3, 3 );
+	pd->graphics->drawText( "Habitable Zone Calculator", 25, kASCIIEncoding, 3, 3 );
+	if ( currentPlanet == subEarth ) {
+		pd->graphics->drawText( planetlonglabels[currentPlanet], strlen( planetlonglabels[currentPlanet] ), kASCIIEncoding, 285, 3 );
+	}
+	else {
+		pd->graphics->drawText( planetlonglabels[currentPlanet], strlen( planetlonglabels[currentPlanet] ), kASCIIEncoding, 301, 3 );
+	}
 	pd->graphics->drawText( "__________________________________________________", 50, kASCIIEncoding, 0, 8 );
 
 	// Input values
@@ -140,18 +147,18 @@ static int update( void* userdata )
 	// Display output values
 	pd->graphics->drawText( "Conservative Limits", 20, kASCIIEncoding, LPADDING, CURSORINIT + 3*CURSORDELTA - 16 );
 
-	pd->system->formatString( &stringnum, "Inner HZ - Runaway Greenhouse:  %2.2f AU", distance( luminosity, getBoundary( temperature, runawayGreenhouse ) ) );
+	pd->system->formatString( &stringnum, "Inner HZ - Runaway Greenhouse:  %2.2f AU", distance( luminosity, getBoundary( temperature, runawayGreenhouse, currentPlanet ) ) );
 	pd->graphics->drawText( stringnum, strlen( stringnum ), kASCIIEncoding, LPADDING + 30, CURSORINIT + 4*CURSORDELTA - 16 );
 
-	pd->system->formatString( &stringnum, "Outer HZ - Maximum Greenhouse:  %2.2f AU", distance( luminosity, getBoundary( temperature, maximumGreenhouse ) ) );
+	pd->system->formatString( &stringnum, "Outer HZ - Maximum Greenhouse:  %2.2f AU", distance( luminosity, getBoundary( temperature, maximumGreenhouse, currentPlanet ) ) );
 	pd->graphics->drawText( stringnum, strlen( stringnum ), kASCIIEncoding, LPADDING + 30, CURSORINIT + 5*CURSORDELTA - 16 );
 
 	pd->graphics->drawText( "Optimistic Limits", 20, kASCIIEncoding, LPADDING, CURSORINIT + 6*CURSORDELTA - 16 );
 
-	pd->system->formatString( &stringnum, "Inner HZ - Recent Venus:        %2.2f AU", distance( luminosity, getBoundary( temperature, recentVenus ) ) );
+	pd->system->formatString( &stringnum, "Inner HZ - Recent Venus:        %2.2f AU", distance( luminosity, getBoundary( temperature, recentVenus, currentPlanet ) ) );
 	pd->graphics->drawText( stringnum, strlen( stringnum ), kASCIIEncoding, LPADDING + 30, CURSORINIT + 7*CURSORDELTA - 16 );
 
-	pd->system->formatString( &stringnum, "Outer HZ - Early Mars:          %2.2f AU", distance( luminosity, getBoundary( temperature, earlyMars ) ) );
+	pd->system->formatString( &stringnum, "Outer HZ - Early Mars:          %2.2f AU", distance( luminosity, getBoundary( temperature, earlyMars, currentPlanet ) ) );
 	pd->graphics->drawText( stringnum, strlen( stringnum ), kASCIIEncoding, LPADDING + 30, CURSORINIT + 8*CURSORDELTA - 16 );
 
 	return 1;
@@ -160,7 +167,9 @@ static int update( void* userdata )
 void reset( void* userdata )
 {
 	PlaydateAPI* pd = userdata;
-	pd->system->setMenuItemValue( presetItem, Sun );
+	pd->system->setMenuItemValue( starItem, Sun );
+
+	currentPlanet = Earth;
 
 	changePresetStar( &temperature, &luminosity, Sun );
 	cursorposition = CURSORINIT;
@@ -169,13 +178,18 @@ void reset( void* userdata )
 	return;
 }
 
-void selectPreset( void* userdata )
+void selectStar( void* userdata )
 {
 	PlaydateAPI* pd = userdata;
-	currentStar = pd->system->getMenuItemValue( presetItem );
+	currentStar = pd->system->getMenuItemValue( starItem );
 
 	changePresetStar( &temperature, &luminosity, currentStar );
 
 	return;
 }
 
+void selectPlanet( void* userdata )
+{
+	PlaydateAPI* pd = userdata;
+	currentPlanet = pd->system->getMenuItemValue( planetItem );
+}

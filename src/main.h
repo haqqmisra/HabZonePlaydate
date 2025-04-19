@@ -18,6 +18,7 @@ const char* fontpath = "fonts/ibm-cga-condensed-8x16.pft";
 static int update( void* userdata );
 void reset( void* userdata );
 void changeMass( void* userdata );
-void selectPreset( void* userdata );
+void selectStar( void* userdata );
+void selectPlanet( void* userdata );
 
 #endif

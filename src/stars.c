@@ -2,9 +2,10 @@
 
 void changePresetStar( float* temp, float* lum, Star preset )
 {
-	*temp = starTemps[ preset ];
-	*lum  = starLums[ preset ];
-
+	if ( preset != NUM_PRESETS ) {
+		*temp = starTemps[ preset ];
+		*lum  = starLums[ preset ];
+	}
 	return;
 }
 
