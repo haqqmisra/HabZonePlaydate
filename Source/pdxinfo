@@ -3,5 +3,5 @@ author=Jacob Haqq Misra
 description=Habitable Zone Calculator for Playdate
 bundleID=net.haqqmisra.habzonecalc
 version=1.0
-buildNumber=3
+buildNumber=4
 imagePath=images
