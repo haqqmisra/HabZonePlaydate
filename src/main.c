@@ -2,15 +2,17 @@
 
 PlaydateAPI* pd = NULL;
 LCDFont* font = NULL;
-PDMenuItem *resetButton = NULL;
-PDMenuItem *unitsButton = NULL;
-PDMenuItem *dataButton  = NULL;
+PDMenuItem *resetItem = NULL;
+PDMenuItem *massItem = NULL;
+PDMenuItem *presetItem  = NULL;
 
-Menu currentItem;
+Menu currentSelection;
+Star currentStar;
 
 float temperature, luminosity;
 char * stringnum;
 int cursorposition;
+int tflag = 0;
 
 int eventHandler( PlaydateAPI* pd, PDSystemEvent event, uint32_t arg )
 {
@@ -19,16 +21,15 @@ int eventHandler( PlaydateAPI* pd, PDSystemEvent event, uint32_t arg )
 	if ( event == kEventInit ) {
 		const char* err;
 		font = pd->graphics->loadFont( fontpath, &err );
-
 		if ( font == NULL ) {
 			pd->system->error( "%s:%i Couldn't load font %s: %s", __FILE__, __LINE__, fontpath, err );
 		}
 		pd->system->setUpdateCallback( update, pd );
 
-		temperature = SOLTEMP;
-		luminosity = SOLLUM;
-		cursorposition = CURSORINIT;
-		currentItem = tempItem;
+		resetItem  = pd->system->addMenuItem( "Reset", reset, pd );
+		presetItem = pd->system->addOptionsMenuItem( "Star", presetlabels, NUM_PRESETS, selectPreset, pd );
+
+		reset( pd );
 	}
 	else if ( event == kEventResume ) {
 		//
@@ -54,47 +55,64 @@ static int update( void* userdata )
         float crankchange = 0;
         if ( pd->system->isCrankDocked() == 0 ) {
                 crankchange = pd->system->getCrankChange();
-		if ( currentItem == tempItem ) {
+		if ( currentSelection == tempItem ) {
 			temperature += crankchange;
 		}
 		else {
 			luminosity += crankchange / 1000;
 		}
+			tflag = 1;
         }
 	if ( pushed & kButtonRight ) {
-		if ( currentItem == tempItem ) {
+		if ( currentSelection == tempItem ) {
 			temperature++;
 		}
 		else {
 			luminosity+=0.001;
 		}
+		tflag = 1;
 	}
 	if ( pushed & kButtonLeft ) {
-		if ( currentItem == tempItem ) {
+		if ( currentSelection == tempItem ) {
 			temperature--;
 		}
 		else {
 			luminosity-=0.001;
 		}
+			tflag = 1;
 	}
 	if ( pushed & kButtonB ) {
-		temperature = SOLTEMP;
-		luminosity = SOLLUM;
+		reset( pd );
+	}
+
+	// Update current star name
+	if ( tflag == 1 ) {
+		pd->system->removeMenuItem( presetItem );
+		currentStar = checkCurrentStar( temperature, luminosity );
+		if ( currentStar == -1 ) {
+			presetItem = pd->system->addOptionsMenuItem( "Star", presetlabels, NUM_PRESETS+1, selectPreset, pd );
+			pd->system->setMenuItemValue( presetItem, UserDefStar );
+		}
+		else {
+			presetItem = pd->system->addOptionsMenuItem( "Star", presetlabels, NUM_PRESETS, selectPreset, pd );
+			pd->system->setMenuItemValue( presetItem, currentStar );
+		}
+		tflag = 0;
 	}
 
 	// Use Up/Down buttons to move cursor
 	if ( pushed & kButtonUp ) {
 		cursorposition = CURSORINIT;
-		currentItem = tempItem;
+		currentSelection = tempItem;
 	}
 	if ( pushed & kButtonDown ) {
 		cursorposition = CURSORINIT + CURSORDELTA;
-		currentItem = lumItem;
+		currentSelection = lumItem;
 	}
 
 	// Keep inputs within the minimum and maximum bounds
-	if ( temperature < 2600 ) {
-		temperature = 2600;
+	if ( temperature < 2500 ) {
+		temperature = 2500;
 	}
 	else if ( temperature > 7200 ) {
 		temperature = 7200;
@@ -138,3 +156,26 @@ static int update( void* userdata )
 
 	return 1;
 }
+
+void reset( void* userdata )
+{
+	PlaydateAPI* pd = userdata;
+	pd->system->setMenuItemValue( presetItem, Sun );
+
+	changePresetStar( &temperature, &luminosity, Sun );
+	cursorposition = CURSORINIT;
+	currentSelection = tempItem;
+
+	return;
+}
+
+void selectPreset( void* userdata )
+{
+	PlaydateAPI* pd = userdata;
+	currentStar = pd->system->getMenuItemValue( presetItem );
+
+	changePresetStar( &temperature, &luminosity, currentStar );
+
+	return;
+}
+

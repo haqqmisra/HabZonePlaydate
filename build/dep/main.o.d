@@ -35,7 +35,8 @@ build/src/main.o: src/main.c src/main.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_sound.h \
  /usr/arm-none-eabi/include/math.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_display.h \
- /opt/PlaydateSDK/C_API/pd_api/pd_api_scoreboards.h src/habzone.h
+ /opt/PlaydateSDK/C_API/pd_api/pd_api_scoreboards.h src/habzone.h \
+ src/stars.h
 src/main.h:
 /usr/arm-none-eabi/include/stdio.h:
 /usr/arm-none-eabi/include/_ansi.h:
@@ -77,3 +78,4 @@ src/main.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_display.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_scoreboards.h:
 src/habzone.h:
+src/stars.h:
