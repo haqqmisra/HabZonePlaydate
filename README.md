@@ -20,6 +20,8 @@ Press the B button to reset the configuration to the default values for Earth or
 
 Press the MENU button to access additional options. You can choose between 10 different preset configurations for various stars that host exoplanets. You can also choose to change the planetary mass between Earth, a super-Earth (5 Earth masses), and a sub-Earth (0.1 Earth masses).
 
+![Photo of the Habitable Zone Calculator for Playdate in action!](HZcalculatorPlaydate.jpg)
+
 ## References and Credits
 
 Kopparapu, R. K., Ramirez, R., Kasting, J. F., Eymet, V., Robinson, T. D., Mahadevan, S., Terrien, R. C., Domagal-Goldman, S., Meadows, V., & Deshpande, R. (2013). [Habitable zones around main-sequence stars: new estimates](https://doi.org/10.1088/0004-637X/765/2/131). _The Astrophysical Journal_, 765(2), 131.
