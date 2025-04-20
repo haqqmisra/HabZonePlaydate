@@ -14,7 +14,7 @@ You can download the ZIP file of the latest [HZ Calculator release](https://gith
 
 ## Using the HZ Calculator on Playdate
 
-The HZ is calculated as a function of the stellar effective temperature and stellar luminosity. Use the UP and DOWN arrows to toggle between stellar temperature and luminosity, and use the LEFT and RIGHT arrows to increase or decrease the values. You can also use the CRANK to increase or decrease these values. The HZ boundaries will automatically update as you adjust these values. The HZ boundaries include the "conservative" limits based on the runaway and maximum greenhouse values as well as the "optimistic" limits based on empirical evidence of the duration that water lasted on Venus and Mars.
+The HZ boundaries are calculated in [astronomical units](https://en.wikipedia.org/wiki/Astronomical_unit) (AU) as a function of the stellar effective temperature and stellar luminosity. Use the UP and DOWN arrows to toggle between stellar temperature and luminosity, and use the LEFT and RIGHT arrows to increase or decrease the values. You can also use the CRANK to increase or decrease these values. The HZ boundaries will automatically update as you adjust these values. The HZ boundaries include the "conservative" limits based on the runaway and maximum greenhouse values as well as the "optimistic" limits based on empirical evidence of the duration that water lasted on Venus and Mars.
 
 Press the B button to reset the configuration to the default values for Earth orbiting the Sun.
 
