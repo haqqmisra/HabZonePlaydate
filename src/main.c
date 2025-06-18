@@ -137,9 +137,11 @@ static int update( void* userdata )
 	pd->graphics->drawText( "__________________________________________________", 50, kASCIIEncoding, 0, 8 );
 
 	// Input values
-	pd->system->formatString( &stringnum, "Stellar Temperature:  %4.0f Kelvin", temperature );
+	pd->system->formatString( &stringnum, "Stellar Temperature:  %4d Kelvin", (int)temperature );
+	//pd->system->formatString( &stringnum, "Stellar Temperature:  %4.0f Kelvin", temperature );
 	pd->graphics->drawText( stringnum, strlen( stringnum ), kASCIIEncoding, LPADDING, CURSORINIT );
-	pd->system->formatString( &stringnum, "Luminosity:           %1.3f solar units", luminosity );
+	pd->system->formatString( &stringnum, "Luminosity:           %1d.%003d solar units", (int)luminosity, (int)((luminosity-(int)luminosity)*1000) );
+	//pd->system->formatString( &stringnum, "Luminosity:           %1.3f solar units", luminosity );
 	pd->graphics->drawText( stringnum, strlen( stringnum ), kASCIIEncoding, LPADDING, CURSORINIT + CURSORDELTA );
 	pd->graphics->drawText( ">", 1, kASCIIEncoding, LPADDING - 10, cursorposition );
 	pd->graphics->drawText( "__________________________________________________", 50, kASCIIEncoding, 0, CURSORINIT + 2*CURSORDELTA - 16 );

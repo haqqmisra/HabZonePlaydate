@@ -21,7 +21,9 @@ build//opt/PlaydateSDK/C_API/buildsupport/setup.o: \
  /usr/arm-none-eabi/include/sys/lock.h \
  /usr/arm-none-eabi/include/machine/stdlib.h \
  /usr/arm-none-eabi/include/alloca.h \
+ /opt/PlaydateSDK/C_API/pd_api/pd_api_file.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_gfx.h \
+ /usr/lib/gcc/arm-none-eabi/14.1.0/include/stdbool.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_sys.h \
  /usr/lib/gcc/arm-none-eabi/14.1.0/include/stdarg.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_lua.h \
@@ -30,12 +32,15 @@ build//opt/PlaydateSDK/C_API/buildsupport/setup.o: \
  /usr/arm-none-eabi/include/sys/_locale.h \
  /usr/arm-none-eabi/include/strings.h \
  /usr/arm-none-eabi/include/sys/string.h \
- /opt/PlaydateSDK/C_API/pd_api/pd_api_file.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_sprite.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_sound.h \
  /usr/arm-none-eabi/include/math.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_display.h \
- /opt/PlaydateSDK/C_API/pd_api/pd_api_scoreboards.h
+ /opt/PlaydateSDK/C_API/pd_api/pd_api_scoreboards.h \
+ /opt/PlaydateSDK/C_API/pd_api/pd_api_network.h \
+ /usr/arm-none-eabi/include/stdio.h \
+ /usr/arm-none-eabi/include/sys/stdio.h \
+ /opt/PlaydateSDK/C_API/pd_api/pd_api_sys.h
 /opt/PlaydateSDK/C_API/pd_api.h:
 /usr/lib/gcc/arm-none-eabi/14.1.0/include/stdint.h:
 /usr/arm-none-eabi/include/stdint.h:
@@ -58,7 +63,9 @@ build//opt/PlaydateSDK/C_API/buildsupport/setup.o: \
 /usr/arm-none-eabi/include/sys/lock.h:
 /usr/arm-none-eabi/include/machine/stdlib.h:
 /usr/arm-none-eabi/include/alloca.h:
+/opt/PlaydateSDK/C_API/pd_api/pd_api_file.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_gfx.h:
+/usr/lib/gcc/arm-none-eabi/14.1.0/include/stdbool.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_sys.h:
 /usr/lib/gcc/arm-none-eabi/14.1.0/include/stdarg.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_lua.h:
@@ -67,9 +74,12 @@ build//opt/PlaydateSDK/C_API/buildsupport/setup.o: \
 /usr/arm-none-eabi/include/sys/_locale.h:
 /usr/arm-none-eabi/include/strings.h:
 /usr/arm-none-eabi/include/sys/string.h:
-/opt/PlaydateSDK/C_API/pd_api/pd_api_file.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_sprite.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_sound.h:
 /usr/arm-none-eabi/include/math.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_display.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_scoreboards.h:
+/opt/PlaydateSDK/C_API/pd_api/pd_api_network.h:
+/usr/arm-none-eabi/include/stdio.h:
+/usr/arm-none-eabi/include/sys/stdio.h:
+/opt/PlaydateSDK/C_API/pd_api/pd_api_sys.h:

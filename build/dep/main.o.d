@@ -22,7 +22,9 @@ build/src/main.o: src/main.c src/main.h \
  /usr/arm-none-eabi/include/stdint.h \
  /usr/arm-none-eabi/include/sys/_intsup.h \
  /usr/arm-none-eabi/include/sys/_stdint.h \
+ /opt/PlaydateSDK/C_API/pd_api/pd_api_file.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_gfx.h \
+ /usr/lib/gcc/arm-none-eabi/14.1.0/include/stdbool.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_sys.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_lua.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_json.h \
@@ -30,13 +32,13 @@ build/src/main.o: src/main.c src/main.h \
  /usr/arm-none-eabi/include/sys/_locale.h \
  /usr/arm-none-eabi/include/strings.h \
  /usr/arm-none-eabi/include/sys/string.h \
- /opt/PlaydateSDK/C_API/pd_api/pd_api_file.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_sprite.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_sound.h \
  /usr/arm-none-eabi/include/math.h \
  /opt/PlaydateSDK/C_API/pd_api/pd_api_display.h \
- /opt/PlaydateSDK/C_API/pd_api/pd_api_scoreboards.h src/habzone.h \
- src/stars.h
+ /opt/PlaydateSDK/C_API/pd_api/pd_api_scoreboards.h \
+ /opt/PlaydateSDK/C_API/pd_api/pd_api_network.h \
+ /opt/PlaydateSDK/C_API/pd_api/pd_api_sys.h src/habzone.h src/stars.h
 src/main.h:
 /usr/arm-none-eabi/include/stdio.h:
 /usr/arm-none-eabi/include/_ansi.h:
@@ -63,7 +65,9 @@ src/main.h:
 /usr/arm-none-eabi/include/stdint.h:
 /usr/arm-none-eabi/include/sys/_intsup.h:
 /usr/arm-none-eabi/include/sys/_stdint.h:
+/opt/PlaydateSDK/C_API/pd_api/pd_api_file.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_gfx.h:
+/usr/lib/gcc/arm-none-eabi/14.1.0/include/stdbool.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_sys.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_lua.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_json.h:
@@ -71,11 +75,12 @@ src/main.h:
 /usr/arm-none-eabi/include/sys/_locale.h:
 /usr/arm-none-eabi/include/strings.h:
 /usr/arm-none-eabi/include/sys/string.h:
-/opt/PlaydateSDK/C_API/pd_api/pd_api_file.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_sprite.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_sound.h:
 /usr/arm-none-eabi/include/math.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_display.h:
 /opt/PlaydateSDK/C_API/pd_api/pd_api_scoreboards.h:
+/opt/PlaydateSDK/C_API/pd_api/pd_api_network.h:
+/opt/PlaydateSDK/C_API/pd_api/pd_api_sys.h:
 src/habzone.h:
 src/stars.h:
